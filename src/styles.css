@@ -36,3 +36,26 @@ li {
     border: 1px solid #dadde1;
     border-radius: 5px;
 }
+
+.overview {
+    margin-bottom: 20px;
+}
+
+.temperature-section img {
+    margin-right: 6px;
+    height: 64px;
+    width: 64px;
+}
+
+.temperature-section strong{
+    color: rgb(33, 33, 33);
+    font-size: 64px;
+    line-height: 64px;
+    font-weight: 400;
+}
+
+.temperature-section .units {
+    position:relative;
+    font-size: 16px;
+    top: -34px;
+}
