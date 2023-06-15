@@ -25,6 +25,11 @@ li {
     line-height: 19px;
 }
 
+li::first-letter{
+    text-transform: capitalize;
+
+}
+
 .outside-wrap {
     max-width: 600px;
     margin: 30px auto;
