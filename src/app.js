@@ -18,7 +18,8 @@ function displayWeather(response){
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
   
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
   cityName.innerHTML = response.data.name;
   description.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
@@ -28,7 +29,45 @@ function displayWeather(response){
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-let apiKey ="6e4f1a7a1140d6ca523a88618d523748";
-city = "Gaborone";
-let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayWeather);
+function search(city){
+  let apiKey ="6e4f1a7a1140d6ca523a88618d523748";
+  let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
+
+function inputSubmit(event){
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+function dispalyFahreinheitTemp(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusTemperature.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+  let fahreinheitElement = (celsiusTemp * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahreinheitElement);
+
+}
+
+function displayCelsiusTemp(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemperature.classList.add("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
+}
+
+let celsiusTemp = null;
+
+let formInput = document.querySelector("#search-form");
+formInput.addEventListener("submit", inputSubmit);
+
+let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
+fahrenheitTemp.addEventListener("click", dispalyFahreinheitTemp);
+
+let celsiusTemperature = document.querySelector("#celsius-temp");
+celsiusTemperature.addEventListener("click", displayCelsiusTemp);
+
+search("Gaborone");

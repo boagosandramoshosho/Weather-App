@@ -68,3 +68,12 @@ li::first-letter{
     font-size: 16px;
     top: -34px;
 }
+
+.temperature-section .active {
+    color: rgb(33, 33, 33);
+    cursor: default;
+}
+
+.temperature-section .active:hover {
+    text-decoration: none;
+}
