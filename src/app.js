@@ -8,7 +8,8 @@ function dateTime(timestamp){
  return `${day} ${hours}:${minutes}`
 }
 
-function displayForecast(){
+function displayForecast(response){
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHTML =`<div class="row">`;
@@ -32,6 +33,12 @@ forecastHTML= forecastHTML + `</div>`;
 forecastElement.innerHTML = forecastHTML;
 }
 
+function getDailyForecast(coordinates){
+  let apiKey = "3c949ba49d38be2487ee278e0d2d4059";
+  let apiUrl =`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 
 function displayWeather(response){
   let temperatureElement = document.querySelector("#temperature");
@@ -51,6 +58,8 @@ function displayWeather(response){
   dateElement.innerHTML = dateTime(response.data.dt*1000);
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getDailyForecast(response.data.coord);
 }
 
 function search(city){
@@ -95,4 +104,3 @@ let celsiusTemperature = document.querySelector("#celsius-temp");
 celsiusTemperature.addEventListener("click", displayCelsiusTemp);
 
 search("Gaborone");
-displayForecast();
