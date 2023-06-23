@@ -31,8 +31,8 @@ function displayForecast(response){
       width="38" 
       />
       <div class="forecast-temperatures">
-      <span class="forecast-temp-max">${Math.round(dailyForecast.temp.max)}°</span>
-      <span class="forecast-temp-min">${Math.round(dailyForecast.temp.min)}°</span> 
+      <span class="forecast-temp-max" id="tempMax">${Math.round(dailyForecast.temp.max)}°</span>
+      <span class="forecast-temp-min" id="tempMin">${Math.round(dailyForecast.temp.min)}°</span> 
       </div>
       </div>`;
 }});
@@ -81,16 +81,6 @@ function inputSubmit(event){
   search(cityInputElement.value);
 }
 
-function dispalyFahreinheitTemp(event){
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  celsiusTemperature.classList.remove("active");
-  fahrenheitTemp.classList.add("active");
-  let fahreinheitElement = (celsiusTemp * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahreinheitElement);
-
-}
-
 function displayCelsiusTemp(event){
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
@@ -104,8 +94,6 @@ let celsiusTemp = null;
 let formInput = document.querySelector("#search-form");
 formInput.addEventListener("submit", inputSubmit);
 
-let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
-fahrenheitTemp.addEventListener("click", dispalyFahreinheitTemp);
 
 let celsiusTemperature = document.querySelector("#celsius-temp");
 celsiusTemperature.addEventListener("click", displayCelsiusTemp);
